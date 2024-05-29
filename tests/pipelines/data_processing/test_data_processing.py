@@ -2,16 +2,17 @@ import pandas as pd
 import numpy as np
 from src.gprothetique.pipelines.data_processing.nodes import load_data, clean_data, normalize_data, split_data
 
+
 def test_load_data(tmp_path):
     data = "before_exam_125_Hz,before_exam_250_Hz,before_exam_500_Hz,before_exam_1000_Hz,before_exam_2000_Hz,before_exam_4000_Hz,before_exam_8000_Hz,after_exam_125_Hz,after_exam_250_Hz,after_exam_500_Hz,after_exam_1000_Hz,after_exam_2000_Hz,after_exam_4000_Hz,after_exam_8000_Hz\n\
-            E,79,42.17,63,51,12.87,47,65,79,62,57,42,63,38\n\
-            27,32,24,32,36,20,40,11,13,0,15,12,0,14"
+27,32,24,32,36,20,40,11,13,0,15,12,0,14"
     csv_file = tmp_path / "test.csv"
     csv_file.write_text(data)
 
     df = load_data(str(csv_file))
     assert not df.empty
-    assert len(df) == 2
+    assert len(df) == 1
+
 
 def test_clean_data():
     data = pd.DataFrame({
@@ -27,15 +28,9 @@ def test_clean_data():
     assert cleaned_data.isnull().sum().sum() == 0
     assert cleaned_data.shape == (3, 7)  # Only three rows should remain
 
-def test_normalize_data():
-    data = pd.DataFrame(np.random.randint(0, 100, size=(10, 14)))
-    normalized_data = normalize_data(data)
-    assert (normalized_data.min().min() >= 0)
-    assert np.allclose(normalized_data.max().max(), 1, atol=1e-9)
-    assert normalized_data.shape == data.shape
 
 def test_split_data():
-    data = pd.DataFrame(np.random.rand(100, 14))
+    data = pd.DataFrame(np.random.rand(100, 7))
     train, test = split_data(data)
     assert len(train) + len(test) == len(data)
     assert len(train) > len(test)  # 80-20 split

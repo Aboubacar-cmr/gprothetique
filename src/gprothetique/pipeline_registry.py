@@ -4,9 +4,9 @@ from typing import Dict
 from kedro.framework.project import find_pipelines
 from kedro.pipeline import Pipeline
 
-from gprothetique.pipelines import data_processing as dp
-from gprothetique.pipelines import data_science as ds
-from gprothetique.pipelines import data_prediction as pred
+from src.gprothetique.pipelines import data_processing as dp
+from src.gprothetique.pipelines import data_science as ds
+from src.gprothetique.pipelines import data_prediction as pred
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
