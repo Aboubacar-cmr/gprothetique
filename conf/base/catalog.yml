@@ -68,6 +68,10 @@ regressor:
   filepath: data/06_models/regressor.pickle
   versioned: true
 
+scaler:
+  type: pickle.PickleDataset
+  filepath: data/02_intermediate/scaler.pickle
+
 
 data:
   type: pandas.CSVDataset

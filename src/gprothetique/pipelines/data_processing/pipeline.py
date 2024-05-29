@@ -18,7 +18,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=normalize_data,
             inputs="cleaned_data",
-            outputs="normalized_data",
+            outputs=["normalized_data", "scaler"],
             name="normalize_data"
         ),
         node(

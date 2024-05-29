@@ -42,14 +42,19 @@ def save_data():
 def predict():
     data = request.get_json()
     df = pd.DataFrame(data)
-    print("YEESSS")
+
+    nan_rows = df[df.isna().any(axis=1)].index
+    df = df.dropna()
+    message = "Format de données OK" if len(nan_rows.values) == 0 else f"Les lignes suivantes {nan_rows.values} contiennent des valeurs manquantes"
+
     df.to_csv(project_path/"data/04_prediction/data.csv", index=False)
 
     with KedroSession.create(project_path=project_path) as session:
         session.run(pipeline_name="predict")
 
     output = pd.read_csv(project_path/"data/04_prediction/data_predict.csv")
-    return output.to_json(orient='records')
+    prediction = output.to_json(orient='records')
+    return jsonify({"predictions": prediction, "message": message})
 
 
 if __name__ == '__main__':
