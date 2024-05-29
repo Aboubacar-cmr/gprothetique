@@ -1,4 +1,4 @@
-from src.tutorial.pipeline_registry import register_pipelines
+from src.gprothetique.pipeline_registry import register_pipelines
 
 def test_register_pipelines():
     pipelines = register_pipelines()

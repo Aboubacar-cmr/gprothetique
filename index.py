@@ -42,10 +42,11 @@ def save_data():
 def predict():
     data = request.get_json()
     df = pd.DataFrame(data)
+    print("YEESSS")
     df.to_csv(project_path/"data/04_prediction/data.csv", index=False)
 
     with KedroSession.create(project_path=project_path) as session:
-        session.run(pipeline_name="ds")
+        session.run(pipeline_name="predict")
 
     output = pd.read_csv(project_path/"data/04_prediction/data_predict.csv")
     return output.to_json(orient='records')

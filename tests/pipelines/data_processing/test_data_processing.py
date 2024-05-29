@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from src.tutorial.pipelines.data_processing.nodes import load_data, clean_data, normalize_data, split_data
+from src.gprothetique.pipelines.data_processing.nodes import load_data, clean_data, normalize_data, split_data
 
 def test_load_data(tmp_path):
     data = "before_exam_125_Hz,before_exam_250_Hz,before_exam_500_Hz,before_exam_1000_Hz,before_exam_2000_Hz,before_exam_4000_Hz,before_exam_8000_Hz,after_exam_125_Hz,after_exam_250_Hz,after_exam_500_Hz,after_exam_1000_Hz,after_exam_2000_Hz,after_exam_4000_Hz,after_exam_8000_Hz\n\

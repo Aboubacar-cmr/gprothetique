@@ -1,3 +1,3 @@
 def test_main_import():
-    import src.tutorial.__main__ as main
+    import src.gprothetique.__main__ as main
     assert main
